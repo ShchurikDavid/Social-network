@@ -1,0 +1,25 @@
+{% load static %}
+
+{% for select_user in all_friends %}   
+    {% if select_user.letter %}           
+        <p class="create-post-text">{{ select_user.letter }}</p>
+    {% else %}
+        <div class="followers-user-block user-block-border">
+            <div class="followers-container-image-container">
+                <!-- <img class="followers-image online-img-{{select_user.id}} avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt=""> -->
+                <div class="status-wrapper">
+                    <img class="followers-image online-img-{{select_user.id}} avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ select_user.profile.avatar }}" alt="">
+                    <img class="status-small-img" src="{% static 'images/offline.svg' %}" alt="off">
+                </div>
+            </div>
+            <div class="user-block-info">
+                <p class="user-block-username">{{ select_user.profile.pseudonym}}</p>
+                {% if edit_modal %}
+                    <img src="{% static 'images/icons/checkbox_false.svg' %}" alt="checkbox" class="del-img checkbox" data-checkbox="false" data-profile-id='{{ select_user.id }}' data-username='{{ select_user.profile.pseudonym }}' id="edit_checkbox_{{ select_user.id }}">
+                {% else %}
+                    <img src="{% static 'images/icons/checkbox_false.svg' %}" alt="checkbox" class="del-img checkbox" data-checkbox="false" data-profile-id='{{ select_user.id }}' data-username='{{ select_user.profile.pseudonym }}' id="checkbox_{{ select_user.id }}">
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

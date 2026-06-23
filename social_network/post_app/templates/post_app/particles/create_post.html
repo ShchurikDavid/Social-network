@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="create-post-container scrolls-container content-border-container">   
+    <div class="create-post-container-text-div">
+        <textarea id="create_post_container_text" class="create-post-container-text" placeholder="Текст публікації"></textarea>
+    </div>
+    <div class="create-post-container-btn-div">
+        <img src="{% static 'images/icons/emoji.svg' %}" alt="emoji-button" class="emoji-button" id="emoji_button">
+        <button id="open-modal-create-post" class="open-modal-create-post-btn">Перейти до оформлення</button>
+    </div>
+</div>

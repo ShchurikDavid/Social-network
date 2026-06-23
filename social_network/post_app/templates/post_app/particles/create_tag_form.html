@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="modal-tag-bg hidden">
+    <div class="modal-create-tag-view">
+        <form action="{% url 'create_tag' %}" method="POST" class="modal-create-tag-view-form" id="create_tag_modal">
+            {% csrf_token %}
+            <div class="modal-create-tag-button-div">
+                <img src="{% static 'images/buttons/exit_button.svg' %}" alt="exit-button" class="create-tag-exit-button" id="exit_tag_button">
+            </div>
+
+            <div class="modal-create-tag-text-div">
+                <p class="modal-create-tag-text">Додати хештег</p>
+            </div>
+
+            <div class="modal-create-tag-inputs">
+                <div class="modal-create-tag-inputs-div">
+                    <p class="create-tag-text">Назва</p>
+                    {{ tag_form.name }}
+                </div>
+            </div>
+        </form>
+        
+        <div class="create-post-btn-div">
+            <button class="cansle-tag-btn" id="cansle_tag_modal">
+                Скасувати
+            </button>
+
+            <button class="create-tag-btn" form="create_tag_modal">
+                Зберегти
+            </button>
+        </div> 
+    </div>  
+</div>

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}WorldIT Налаштування{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+{% endblock %}
+
+{% block info-content %}
+    <div class="info-navigations">
+        <p class="nav-text info-navigations-active-test" data-id="set_settings_container">Особиста інформація</p>
+        <p class="nav-text info-navigations-text" data-id="set_albums_container">Альбоми</p>
+    </div>
+{% endblock %}
+
+{% block main-content %}
+    <div class="set-container visible" id="set_settings_container">
+        {% include 'settings_app/particals/profile_picture.html' %}
+        {% include 'settings_app/particals/profile_set.html' %}
+        {% include 'settings_app/particals/profile_signature.html' %}
+    
+        <div class="info-navigations-text-div">
+            <p class="info-navigations-theme" id="themeToggle1">Змінити тему</p>
+        </div>
+    </div>
+
+    <div class="set-container hidden" id="set_albums_container">
+        {% include 'settings_app/particals/add_photo.html' %}
+        {% include 'settings_app/particals/create_almubs.html' %}
+
+        <div class="info-navigations-text-div">
+            <p class="info-navigations-theme" id="themeToggle2">Змінити тему</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modals %}{% endblock %}
+
+{% block script %}
+    <script defer>
+        const editBtn = "{% static 'images/edit_btn.svg' %}"
+        const saveBtn = "{% static 'images/save_btn.svg' %}"
+        const inputEye = "{% static 'images/close_eye.svg' %}"
+        
+        const plusImg = "{% static 'images/icons/plus.svg' %}"
+        const imgIconImg = "{% static 'images/icons/img.svg' %}"
+
+        const openEye = "{% static 'images/open_eye.svg' %}"
+        const closeEye = "{% static 'images/close_eye.svg' %}"
+
+        const checkboxFalse = "{% static 'images/icons/checkbox_false.svg' %}"
+        const checkboxTrue = "{% static 'images/icons/checkbox_true.svg' %}"
+
+        // const avatarImg = "{% static 'images/icons/indicator_active.svg' %}"
+        const avatarImg = "{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ request.user.profile.avatar }}"
+        const userUsername = "{{ user.username }}"
+        const profilePseudonym = "{{ user.profile.pseudonym }}"
+        const profileUrlWatch = "{% url 'profile' user_id=user.profile.id action='watch' %}"
+    </script>
+
+    <script src="{% static 'js/settings.js' %}" defer></script>
+    <script src="{% static 'js/settingsInputs.js' %}" defer></script>
+    <script src="{% static 'js/themeChange.js' %}" defer></script>
+    <script src="{% static 'js/switchPages.js' %}" defer></script>
+{% endblock %}

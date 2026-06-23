@@ -1,0 +1,17 @@
+{% load static %}
+
+{% for select_user in requests %}
+    <div class="followers-user-block user-profile-request" data-profile-id="{{ select_user.id }}">
+        <div class="followers-container-image-container">
+            <!-- <img class="message-image online-img-{{select_user.id}} avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt="indicator"> -->
+            <div class="status-wrapper">
+                <img class="message-image online-img-{{select_user.id}} avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ select_user.profile.avatar }}" alt="indicator">
+                <img class="status-small-img" src="{% static 'images/offline.svg' %}" alt="off">
+            </div>
+        </div>
+        <div class="user-block-info">
+            <p class="user-block-username">{{ select_user.profile.pseudonym }}</p>
+            <p class="user-block-email">{{ friends_count|default:'0' }} підписників</p>
+        </div>
+    </div>
+{% endfor %}

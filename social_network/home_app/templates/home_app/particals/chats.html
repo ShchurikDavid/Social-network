@@ -1,0 +1,30 @@
+{% load static %}
+
+{% for chat in chats %}
+    {% for select_user in chat.users.all %}
+        {% if select_user != user %}
+            {% with other_user=select_user %}
+                <div class="message-user-block open-chat-with" data-chat-id="{{ chat.id }}" data-username="{{ other_user.username }}">
+
+                    <div class="message-container-image-container">
+                        <!-- <img class="message-image online-img-{{other_user.id}} avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt="indicator"> -->
+                        <div class="status-wrapper">
+                            <img class="message-image online-img-{{other_user.id}} avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ other_user.profile.avatar }}" alt="indicator">
+                            <img class="status-small-img" src="{% static 'images/offline.svg' %}" alt="off">
+                        </div>
+                    </div>
+                    
+                    {% with last_message=chat.messages.first %}
+                        <div class="message-block-info">
+                            <div class="message-block-info-header">                                  
+                                <p class="message-block-username">{{ other_user.profile.pseudonym }}</p>
+                                <p class="message-block-time">{% if last_message.created_at %} {{ last_message.created_at|date:"H:i" }} {% else %} 00:00 {% endif %}</p>
+                            </div>
+                            <p class="message-block-email">{% if last_message.text %} {{ last_message.text }} {% else %} Без публікацій {% endif %}</p>
+                        </div>
+                    {% endwith %}
+                </div>
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}

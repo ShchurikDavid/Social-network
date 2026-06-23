@@ -1,0 +1,30 @@
+{% load static %}
+
+{% if msg.text %} 
+    <div class="msg-container">
+        <!-- <img class="message-image msg-image online-img-{{msg.sender.username.id}} avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt="indicator"> -->
+        <div class="status-wrapper status-wrapper-msg">  
+            <img class="message-image msg-image online-img-{{msg.sender.id}} avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ msg.sender.profile.avatar }}"" alt="indicator">
+            <img class="status-small-img status-small-img-msg" src="{% static 'images/offline.svg' %}" alt="off">
+        </div>
+
+        <div class="msg-info content-border-container">
+            <div class="msg-info-text">
+                <p class="msg-username-text">{{ msg.sender.username }}</p>
+                <div class="msg-text">{{ msg.text }}</div>
+            </div>
+            <div class="msg-info-date">
+                <p class="msg-date-text">{{ msg.created_at|date:"H:i" }}</p>
+                <img class="msg-img" src="{% static 'images/msg/open.svg' %}" alt="open" >
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% for image_obj in msg.images.all %}
+    {% if LOCAL == 'False' %}
+        <img class="send-message-image-other load-message-image" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ image_obj.image }}" alt="img">
+    {% else %}
+        <img class="send-message-image-other load-message-image" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ image_obj.image }}" alt="img">
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,67 @@
+.context-menu {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 21.45rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    border-radius: 0.625rem;
+    background-color: var(--bg-body);
+}
+
+.context-menu-user {
+    height: 8.75rem;
+}
+
+.context-menu-admin {
+    height: 11rem;
+}
+
+.context-menu-header {
+    width: 100%;
+    height: 1.25rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.context-menu-block-gap {
+    margin-bottom: 1rem;
+}
+
+.context-menu-block {
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0.5rem;
+    gap: 0.625rem;
+    border-radius: 0.625rem;
+}
+
+.context-menu-block:hover {
+    cursor: pointer;
+    background-color: var(--border-light);
+}
+
+.context-menu-hr {
+    width: 100%;
+    height: 1px;
+    margin: 0.5rem 0px;
+    background-color: var(--border-light);
+}
+
+.context-menu-text {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.close-context-menu {
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+{% load static %}
+
+{% for group in groups %}
+    <div class="message-user-block user-select" data-chat-id="{{ group.id }}">
+        <div class="message-container-image-container">
+            <img class="message-image" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ group.avatar }}" alt="">
+        </div>
+        
+        {% with last_message=group.messages.first %}
+            <div class="message-block-info">
+                <div class="message-block-info-header">
+                    <p class="message-block-username">{{ group.name }}</p>
+                    <p class="message-block-time">{% if last_message.created_at %} {{ last_message.created_at|date:"H:i" }} {% else %} 00:00 {% endif %}</p>
+                </div>
+                <p class="message-block-email">{% if last_message.text %} {{ last_message.text }} {% else %} Без публікацій {% endif %}</p>
+            </div>
+        {% endwith %}
+    </div>
+{% endfor %}

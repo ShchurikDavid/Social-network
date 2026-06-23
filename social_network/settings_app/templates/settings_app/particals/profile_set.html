@@ -1,0 +1,51 @@
+{% load static %}
+
+<div class="set-container scrolls-container content-border-container">   
+    <div class="set-container-header">
+        <p class="set-container-header-title">Картка профілю</p>
+        <img src="{% static 'images/edit_btn.svg' %}" alt="edit_btn" class="set-container-header-btn" id="base_set">
+    </div>
+
+    <form method="POST" class="set-container idle-container" id="base_set_con">
+        <div class="modal-create-post-inputs-div">
+            <p class="create-post-text">Ім’я</p>
+            <input type="text" name="pseudonym" class="create-post-input" value="{{ request.user.profile.pseudonym }}" id="set_pseudonym_input">
+        </div>
+
+        <div class="modal-create-post-inputs-div">
+            <p class="create-post-text">Прізвище</p>
+            <input type="text" name="last_name" class="create-post-input" value="Прізвище">
+        </div>
+
+        <div class="modal-create-post-inputs-div">
+            <p class="create-post-text">Дата народження</p>
+            <div class="input-wrapper">
+                <input type="date" name="birth_date" class="create-post-input" value="{{ request.user.profile.birth_date|date:'Y-m-d' }}" id='birth_date_input'>
+                <img src="{% static 'images/open_eye.svg' %}" alt="eye" class='input-eye' id='birth_date_input_eye'>
+            </div>
+        </div>
+
+        <div class="modal-create-post-inputs-div">
+            <p class="create-post-text">Електронна адреса</p>
+            <div class="input-wrapper">
+                <input type="email" name="email" class="create-post-input" value="{{ request.user.email }}" id='email_input'>
+                <img src="{% static 'images/open_eye.svg' %}" alt="eye" class='input-eye' id='email_input_eye'>
+            </div>
+        </div>
+    </form>
+
+    <div class="set-container-header">
+        <p class="set-container-header-title">Пароль</p>
+        <img src="{% static 'images/edit_btn.svg' %}" alt="edit_btn" class="set-container-header-btn" id="password_set">
+    </div>
+
+    <form method="POST" class="set-container idle-container" id="password_set_con">
+        <div class="modal-create-post-inputs-div">
+            <p class="create-post-text">Пароль</p>
+            <div class="password-wrapper">
+                <input type="text" name="new_password" class="create-post-input" placeholder="⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕">
+                <img src="{% static 'images/close_eye.svg' %}" alt="eye" class='password-eye' id='check_password_eye'>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,121 @@
+<html lang="en" data-theme="light">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name='csrf_token' data-csrf-token='{{csrf_token}}' id="meta_csrf_token">
+        {% block meta %}
+        {% endblock %}
+        <title>{% block title %}{% endblock  %}</title>
+        
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/create_post.css' %}">
+        <link rel="icon" href="data:,">
+        {% block links %}{% endblock %}
+
+        <script>
+            (function () {
+                const theme = localStorage.getItem('theme');
+                if (theme) {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            })();
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                {% if request.resolver_match.url_name != 'auth' %}      
+                    <a href="{% url 'home' %}" class="logo-image-div">
+                        <img src="{% static 'images/icons/WorldIT.svg' %}" alt="World IT logo" class="logo-image">
+                    </a>
+                    <div class='container'>
+                        <nav>
+                            <a href="{% url 'home' %}" class="nav-link" id="house">
+                                <img src="{% static 'images/icons/house.svg' %}" alt="house" class="nav-image-div svg-icon">
+                                <span class="nav-span">Головна</span>
+                            </a>
+
+                            <a href="{% url 'post' %}" class="nav-link" id="post">
+                                <img src="{% static 'images/icons/post.svg' %}" alt="post" class="nav-image-div svg-icon">
+                                <span class="nav-span">Мої публікації</span>
+                            </a>
+
+                            <a href="{% url 'all_friends' %}" class="nav-link" id="friends">
+                                <img src="{% static 'images/icons/friends.svg' %}" alt="friends" class="nav-image-div svg-icon">
+                                <span class="nav-span">Друзі</span>
+                            </a>
+
+                            <a href="{% url 'chat' %}" class="nav-link" id="chat">
+                                <img src="{% static 'images/icons/chat.svg' %}" alt="chat" class="nav-image-div svg-icon">
+                                <span class="nav-span">Чати</span>
+                            </a>
+
+                            <a href="{% url 'settings' %}" class="nav-link" id="settings">
+                                <img src="{% static 'images/icons/settings.svg' %}" alt="settings" class="nav-image-div svg-icon">
+                                <span class="nav-span">Налаштування</span>
+                            </a>
+                        </nav>
+                        
+                        {% if request.user.is_authenticated %}
+                            <form action="{% url 'logout' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class='logout' id="logout">
+                                    <img src="{% static 'images/buttons/loguot.svg' %}" alt="loout" class="logout-image">
+                                </button>             
+                            </form>
+                        {% else %}      
+                            <a href="{% url 'auth' %}" class='sing-in-up'>
+                                <span class="sing-in-up-span">Sing in/up</span>
+                            </a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <img src="{% static 'images/icons/WorldIT.svg' %}" alt="World IT logo" class="logo-image">
+                {% endif %}
+            </div>
+        </header>
+
+        <main>        
+            <div class="info-container">
+                {% block info-content %}
+                    
+                {% endblock %}
+            </div>
+            <div class="main-container" id="main_container">  
+                {% block main-content %}
+                
+                {% endblock %}
+            </div>  
+            {% block content %}
+            
+            {% endblock %}
+        </main>
+        
+        {% block modals %}
+        
+        {% endblock %}
+        <script defer>
+            const LOCAL = "{{ LOCAL }}"
+            let myId = "{{ request.user.id }}"
+
+            // let onlineImg = "{% static 'images/icons/indicator_active.svg' %}"
+            // let offlineImg = "{% static 'images/icons/indicator.svg' %}"
+            // let avatarImg = "{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ request.user.profile.avatar }}"
+
+            let onlineImg = "{% static 'images/online.svg' %}"
+            let offlineImg = "{% static 'images/offline.svg' %}"
+            let userId = "{{ request.user.id }}"
+            let isAuthenticated = "{{ request.user.is_authenticated }}"
+        </script>
+        
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+        <script src="{% static 'js/jquery-4.0.0.min.js' %}" defer></script>
+        <script src="{% static 'js/checkActivity.js' %}" defer></script>
+        <script src="{% static 'js/manager.js' %}" defer></script>
+        <script src="{% static 'js/openPage.js' %}" defer></script>
+        <script src = "{% static 'js/web_socket.js' %}" defer></script>
+        {% block script %}{% endblock %}
+    </body>
+</html>
+

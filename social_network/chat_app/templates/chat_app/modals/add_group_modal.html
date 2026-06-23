@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="modal-add-group-bg hidden">
+    <div class="modal-add-group-view">
+        <form method="POST" class="modal-registration-view-form" id="add_group_modal">
+            {% csrf_token %}
+            <div class="modal-create-post-button-div">
+                <img src="{% static 'images/buttons/exit_button.svg' %}" alt="exit-button" class="create-post-exit-button" id="cansle_add_group_modal">
+            </div>
+
+            <div class="modal-registration-text-div">
+                <p class="modal-registration-text">Нова група</p>
+            </div>
+
+            <div class="contacts-input-wrap contacts-input-wrap-start">
+                <img src="{% static 'images/icons/search_img.svg' %}" alt="search" class='contacts-input-img contacts-input-img-start'>
+                <input type="text" class='contacts-input' id="create_filter_input" placeholder="Пошук">
+            </div>
+
+            <p class="add-group-text">Вибрано: <span class="count_select_users">0</span></p>
+
+            <div class="checkbox-users-container">
+                <div id="users_array"></div>
+                <div id='modal_loader'></div>
+            </div>
+
+            <div class="create-post-btn-div">
+                <button type="button" class="cansle-tag-btn" id="cansle_add_group_modal">
+                    Скасувати
+                </button>
+
+                <button type="button" class="create-tag-btn" id="next_add_group_modal">
+                    Далі
+                </button>
+            </div> 
+        </form>
+    </div>  
+</div>

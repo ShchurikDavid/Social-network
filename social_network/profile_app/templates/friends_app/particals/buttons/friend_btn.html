@@ -1,0 +1,6 @@
+{% load static %}
+
+<div class="block-buttomns">
+    <img class="friends-btn msg-btn" data-action-type="msg" src="{% static 'images/msg_btn.svg' %}" alt="">
+    <img class="friends-btn" data-action-type="friends" data-action='delete_frienship' data-user-id="{{ select_user.id }}" src="{% static 'images/delete_btn.svg' %}" alt="">           
+</div>

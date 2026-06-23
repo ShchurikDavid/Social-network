@@ -1,0 +1,173 @@
+.info-container {
+    display: none;
+}
+
+.main-container {
+    display: none;
+}
+
+.chat-users-container {
+    height: 50rem;
+    width: 21.875rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.user-block-info {
+    justify-content: center;
+}
+
+.chat-group-container {
+    min-height: 19.875rem; 
+    max-height: 19.875rem;
+}
+
+.message-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.side-info-conteiner  {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    overflow: hidden;
+}
+
+.chat-conteiner {
+    height: 50rem;
+    width: 35.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.info-container {
+    height: 50rem;
+}
+
+.chat-message-container {
+    min-height: 19.375rem; 
+    max-height: 19.375rem;
+}
+
+.contacts-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 46.875rem;
+}
+
+.followers-container {
+    overflow-y: auto;
+}
+
+.user-select {
+    cursor: pointer;
+
+    transition: 
+        background-color 0.2s ease
+}
+
+.user-select:hover {
+    background-color: var(--bg-body);    
+}
+
+.user-profile-request, .open-chat-with {
+    cursor: pointer;
+    
+    transition: 
+        background-color 0.2s ease
+}
+.user-profile-request:hover{
+    background-color: var(--bg-body);
+}
+
+.open-chat-with:hover {
+    background-color: var(--bg-body);
+}
+
+.open-chat-with:hover {
+    background-color: var(--bg-body);
+    cursor: pointer;
+}
+
+.user-profile-request, .open-chat-with {
+    cursor: pointer;
+    
+    transition: 
+        background-color 0.2s ease
+}
+.user-profile-request:hover{
+    background-color: var(--bg-body);
+}
+
+.open-chat-with:hover {
+    background-color: var(--bg-body);
+}
+
+.create-group-chat {
+    width: 100%;
+    height: 2.5rem;
+    border: none;
+    background-color: transparent;
+    border-radius: 10rem;
+    overflow: hidden;
+
+    transition: transform 0.2s ease;
+}
+
+.create-group-chat:hover {
+    overflow: visible;
+    cursor: pointer;
+    transform: scale(1.02);
+} 
+
+.empty-chat-conteiner{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    
+    height: 5.45rem;
+    width: 18.75rem;
+}
+
+.empty-chat-title{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.empty-chat-text{
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-main);
+}
+
+.clear-chat, .context-menu-admin-interactive, .context-menu-interactive {
+    cursor: pointer;
+}
+
+#chats_loader, #friends_loader, #chats_msg_loader, #groups_loader, #modal_loader, #edit_modal_loader {
+    width: 100%;
+    min-height: 1px;
+}
+
+.requests-container, .message-container {
+    gap: 1.5rem;
+}
+
+.images-text-img {
+    cursor: pointer;
+}

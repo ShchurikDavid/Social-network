@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}WorldIT Мої публікації{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/post_app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/create_modal.css' %}">
+{% endblock %}
+
+{% block info-content %}
+    <div class="profile-container content-border-container">
+        <div class="profile-user-container">
+            <div class="profile-user-image-container">
+                <!-- <img class="profile-user-image avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt="avatar"> -->
+                <div class="status-wrapper">
+                    <img class="profile-user-image online-img-{{request.user.id}} avatar-img" src='{% if LOCAL == "False" %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ request.user.profile.avatar }}' alt="avatar">
+                    <img class="status-img" src="{% static 'images/offline.svg' %}" alt="off">
+                </div>
+            </div>
+            <div class="profile-username">
+                <a href="{% url 'profile' user_id=user.profile.id action='watch' %}" class="username-text" id="username_text">{{ user.profile.pseudonym }}</a>
+                <a href="{% url 'profile' user_id=user.profile.id action='watch' %}" class="pseudonym-text" id="pseudonym_text">{{ user.username }}</a>
+            </div>      
+        </div>
+        <div class="profile-statistics-container">
+            <div class="profile-static">
+                <p class="static-text">{{ user.signature|default:'0' }}</p>
+                <p class="name-static-text">Дописи</p>
+            </div>
+            <div class="profile-static profile-static-border">
+                <p class="static-text">{{ user.reader|default:'0' }}</p>
+                <p class="name-static-text">Читачі</p>
+            </div>
+            <div class="profile-static">
+                <p class="static-text">{{ user.friends|length|default:'0' }}</p>
+                <p class="name-static-text">Друзі</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main-content %}
+   
+   {% include "post_app/particles/create_post.html" %}
+
+    <div class="post-content-container" id="post_content">
+        <div class="post-content-container-main" id="post_content_main">
+            {% include 'post_app/download_parts/post_list.html'  %}
+        </div>
+        {% include 'post_app/download_parts/sentinel.html'  %}
+    </div>
+
+{% endblock %}
+
+{% block modals %}
+    {% include "post_app/particles/create_post_form.html" %}
+    {% include "post_app/particles/create_tag_form.html" %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        const ADD_URL_IMG_PATH = "{% static 'images/icons/add_url.svg' %}";
+        const DELTE_IMG_PATH = "{% static 'images/icons/delete_image.svg' %}";
+    </script>
+
+    <script src = "{% static 'js/deletePost.js' %}" defer></script>
+    <script src = "{% static 'js/createPostModal.js' %}" defer></script>
+    <script src = "{% static 'js/postLoader.js' %}" defer></script>
+{% endblock %}

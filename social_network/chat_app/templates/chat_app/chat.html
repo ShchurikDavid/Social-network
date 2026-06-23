@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}WorldIT Чати{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/profile_modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/create_modal.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+    <link rel="stylesheet" href="{% static 'css/filter_input.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat_modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat_with.css' %}">
+    <link rel="stylesheet" href="{% static 'css/context_menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="chat-users-container">
+        <button type="submit" class='create-group-chat' id="open_add_group_modal">
+            <img src="{% static 'images/create_group_chat.svg' %}" alt="create_group_chat" class="create-group-chat-image">
+        </button> 
+
+        <div class="contacts-block message-container content-border-container">
+            <div class="container-header">
+                <div class="container-header-name-container">
+                    <div class="container-image-container">
+                        <img class="container-image" src="{% static 'images/icons/people.svg' %}" alt="">
+                    </div>
+                    <p class="container-header-name">Контакти</p>
+                </div>
+            </div>
+
+            <div class="contacts-input-wrap">
+                <img src="{% static 'images/icons/search_img.svg' %}" alt="search" class='contacts-input-img'>
+                <input type="text" class='contacts-input' placeholder="Пошук" id="filter_friends" data-selection="friends">
+            </div>
+
+            <div class="followers-container" id="friends_container">
+                {% include 'chat_app/particals/friends.html'  %}
+
+                <div id="friends_loader" data-selection="friends"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-conteiner requests-container content-border-container" id="chat_container">
+        <div class="empty-chat-conteiner" id="empty_chat_conteiner">
+            <p class="empty-chat-title">Почніть нове спілкування</p>
+            <p class="empty-chat-text">Оберіть контакт зі списку ліворуч або створіть групу, щоб почати спілкування</p>
+        </div>
+    </div>
+
+    <div class="side-info-conteiner " >
+        <div class="message-container content-border-container">
+            <div class="container-header">
+                <div class="container-header-name-container">
+                    <div class="container-image-container">
+                        <img class="container-image" src="{% static 'images/icons/message.svg' %}" alt="">
+                    </div>
+                    <p class="container-header-name">Повідомлення</p>
+                </div>
+            </div>
+
+
+            <div class="chat-message-container message-list" id="chats_container">
+                {% include 'chat_app/particals/chats.html' %}
+
+                <div id="chats_loader" data-selection="chats"></div>
+            </div>
+        </div>
+
+        <div class="message-container content-border-container">
+            <div class="container-header">
+                <div class="container-header-name-container">
+                    <div class="container-image-container">
+                        <img class="container-image" src="{% static 'images/icons/message.svg' %}" alt="">
+                    </div>
+                    <p class="container-header-name">Групові чати</p>
+                </div>
+            </div>
+
+            <div class="chat-group-container message-list">
+                {% include 'chat_app/particals/groups.html' %}
+
+                <div id="groups_loader" data-selection="groups"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modals %}
+    {% include 'chat_app/modals/context_menu_admin.html'  %}
+    {% include 'chat_app/modals/context_menu_user.html'  %}
+    
+    {% include 'chat_app/modals/add_group_modal.html' %}
+    {% include 'chat_app/modals/create_group_modal.html' %}
+
+    {% include 'chat_app/modals/edit_add_group_modal.html' %}
+    {% include 'chat_app/modals/edit_create_group_modal.html' %}
+{% endblock %}
+
+{% block script %}
+    <script defer>
+        const falseCheckbox = "{% static 'images/icons/checkbox_false.svg' %}"
+        const trueCheckbox = "{% static 'images/icons/checkbox_true.svg' %}"
+
+        // const indicatorImg= "{% static 'images/icons/indicator.svg' %}"
+        const indicatorImg = '{% if LOCAL == "False" %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ request.user.profile.avatar }}'
+        const deleteImg = "{% static 'images/icons/del.svg' %}"
+    </script>
+
+    <script src = "{% static 'js/chatModals.js' %}" defer></script>
+    <script src = "{% static 'js/chatsLouder.js' %}" defer></script>
+    <script src = "{% static 'js/chats.js' %}" defer></script>
+    <script src = "{% static 'js/chatsFilter.js' %}" defer></script>
+    <script src = "{% static 'js/editChat.js' %}" defer></script>
+    <script src = "{% static 'js/modalLouder.js' %}" defer></script>
+{% endblock %}

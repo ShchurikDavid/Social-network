@@ -1,0 +1,24 @@
+
+{% load static %}
+
+<div class="context-menu context-menu-admin hidden" id="context_menu_admin">
+    <div class="context-menu-header">
+        <img src="{% static 'images/icons/interaction.svg' %}" alt="checkbox" class="del-img close-context-menu">
+    </div>
+
+    <div class="context-menu-block context-menu-block-gap">
+        <img src="{% static 'images/icons/black_img.svg' %}" alt="checkbox" class="del-img">
+        <p class="context-menu-text">Медіа</p>
+    </div>
+
+    <div class="context-menu-block" id="edit_group_btn">
+        <img src="{% static 'images/icons/pen.svg' %}" alt="checkbox" class="del-img">
+        <p class="context-menu-text">Редагувати групу</p>
+    </div>
+
+    <div class="context-menu-hr"></div>
+    <div class="context-menu-block" >
+        <img src="{% static 'images/icons/del.svg' %}" alt="checkbox" class="del-img">
+        <p class="context-menu-text">Видалити чат</p>
+    </div>
+</div>

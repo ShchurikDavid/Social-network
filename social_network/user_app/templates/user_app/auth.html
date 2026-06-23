@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block meta %}{% endblock %}
+
+{% block title %}WorldIT Авторизація{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="auth-container">  
+        <div class="auth-form-container">
+            <div class="auth-navigation">
+                <p id="show_registration" class="auth-text-active">Реєстрація</p>
+                <p id="show_login" class="auth-text">Авторизація</p>
+            </div>
+        
+            {% include 'user_app/registration.html' %}
+            {% include 'user_app/login.html' %}
+            {% include 'user_app/confirm_email.html' %}
+        </div>
+        
+        <div class="auth-image-div">
+            <img src="{% static 'images/Container.svg' %}" alt="Контейнер" class="auth-image">
+        </div>
+    </div>
+{% endblock %}
+
+{% block modals %}{% endblock %}
+
+{% block script %}
+    <script>
+        const closeEye = "{% static 'images/close_eye.svg' %}"
+        const openEye = "{% static 'images/open_eye.svg' %}"
+    </script>
+
+    <script src="{% static 'js/inputCode.js' %}" defer></script>
+    <script src="{% static 'js/authManager.js' %}" defer></script>
+{% endblock %}

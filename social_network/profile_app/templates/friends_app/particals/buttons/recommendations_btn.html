@@ -1,0 +1,6 @@
+{% load static %}
+
+<div class="block-buttomns">
+    <img class="friends-btn" data-action-type="recommendations" data-action='request' data-user-id="{{ select_user.id }}" src="{% static 'images/add_btn.svg' %}" alt="">
+    <img class="friends-btn" data-action-type="recommendations" data-action='dismissed' data-user-id="{{ select_user.id }}" src="{% static 'images/delete_btn.svg' %}" alt="">     
+</div>

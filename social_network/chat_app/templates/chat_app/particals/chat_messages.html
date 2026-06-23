@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="chat-header">
+    <div class="chat-header-div-border">
+        <div class="chat-header-div">
+            <img class="images-text-img clear-chat" src="{% static 'images/icons/back.svg' %}" alt="back">
+    
+            <div class="chat-header-info">
+                {% if chat.name %}
+                    <div class="status-wrapper">
+                        <img class="message-image avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ chat.avatar }}" alt="indicator">
+                    </div>
+                {% else %}
+                    <!-- <img class="message-image online-img-{{other_user.id}} avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt="indicator"> -->
+                    <div class="status-wrapper">
+                        <img class="message-image online-img-{{other_user.id}} avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ other_user.profile.avatar }}" alt="indicator">
+                        <img class="status-small-img" src="{% static 'images/offline.svg' %}" alt="off">
+                    </div> 
+                {% endif %}
+
+                <div class="chat-header-text">
+                    <p class="username-text" id="group_name">
+                        {% if chat.name %}
+                            {{ chat.name }}
+                        {% else %}
+                            {{ other_user.profile.pseudonym }}
+                        {% endif %}
+                    </p>
+
+                    <p class="extra-info-text">{{ chat.users.all|length }} учасники</p>
+
+                    {% for user in chat_users %}
+                        <p class="get-group-id" data-get-id='{{user.id}}' hidden></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        {% if chat.admin == user %}
+            <img class="images-text-img context-menu-admin-interactive" src="{% static 'images/icons/interactive.svg' %}" alt="interactive">
+        {% else %}
+            <img class="images-text-img context-menu-interactive" src="{% static 'images/icons/interactive.svg' %}" alt="interactive">
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="chat-messages" id="chat_message_container">
+    {% include 'chat_app/chat_msg/messages.html' %}
+</div>
+<div class="chat-input">
+    <form action="" class="message-form" id="message_form">
+        <input type="text" placeholder="Повідомлення" class="contacts-input message-input" id="message_form_input">
+
+        <input type="file" accept="image/*" multiple hidden id="message_images_input">
+    </form>
+
+    <img class="input-img" src="{% static 'images/inputs/emoji.svg' %}" alt="back">
+    <img class="input-img message-image-triger" src="{% static 'images/inputs/images.svg' %}" alt="back">
+    <img class="input-img" src="{% static 'images/inputs/send.svg' %}" alt="back" id="message_form_btn">
+</div>

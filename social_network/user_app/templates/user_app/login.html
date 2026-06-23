@@ -1,0 +1,28 @@
+{% load static %}
+<p class="under-auth-navigation-text">Раді тебе знову бачити!</p>
+
+<div class="auth-form">
+    <form action="{% url 'login' %}" method="POST" id="login_form" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-registration-inputs-div">
+            <div class="modal-registration-inputs">
+                <p class="registration-text">Електронна пошта</p>
+                {{ login_form.email }}
+            </div>
+            <div class="modal-registration-inputs">
+                <p class="registration-text">Пароль</p>
+
+                <div class="password-wrapper">
+                    {{ login_form.password }}
+                    <img src="{% static 'images/close_eye.svg' %}" alt="eye" class='password-eye' id='password3_eye'>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <p class="error-text"></p>
+    
+    <div class="login-btn-div">
+        <button type='submit' form='login_form' class='login-btn'>Увійти</button>
+    </div>
+</div>

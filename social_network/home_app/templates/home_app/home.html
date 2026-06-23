@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}WorldIT Головна{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/post_app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile_modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/create_modal.css' %}">
+{% endblock %}
+
+{% block info-content %}
+    <div class="profile-container content-border-container">
+        <div class="profile-user-container">
+            <div class="profile-user-image-container">
+                <div class="status-wrapper">
+                    <img class="profile-user-image avatar-img online-img-{{request.user.id}} avatar-img" src='{% if LOCAL == "False" %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ request.user.profile.avatar }}' alt="indicator">
+                    <img class="status-img" src="{% static 'images/offline.svg' %}" alt="off">
+                </div>
+            </div>
+            <div class="profile-username">
+                {% if user.profile %}
+                    <a href="{% url 'profile' user_id=user.profile.id action='watch' %}" class="username-text" id="username_text">{{ user.profile.pseudonym }}</a>
+                    <a href="{% url 'profile' user_id=user.profile.id action='watch' %}" class="pseudonym-text" id="pseudonym_text">{{ user.username }}</a>
+                {% else %}
+                    <a class="username-text" id="username_text">Enter pseudonym</a>
+                    <a class="pseudonym-text" id="pseudonym_text">Enter username</a>
+                {% endif %}
+            </div>      
+        </div>
+        <div class="profile-statistics-container">
+            <div class="profile-static">
+                <p class="static-text">{{ user.posts.count|default:'0' }}</p>
+                <p class="name-static-text">Дописи</p>
+            </div>
+            <div class="profile-static profile-static-border">
+                <p class="static-text">{{ friends_count|default:'0' }}</p>
+                <p class="name-static-text">Читачі</p>
+            </div>
+            <div class="profile-static">
+                <p class="static-text">{{ friends_count|default:'0' }}</p>
+                <p class="name-static-text">Друзі</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="requests-container content-border-container">
+        <div class="container-header">
+            <div class="container-header-name-container">
+                <div class="container-image-container">
+                    <img class="container-image" src="{% static 'images/icons/people.svg' %}" alt="">
+                </div>
+                <p class="container-header-name">Запити</p>
+            </div>
+            <button class="container-header-button" data-id="requests" id="all_requests">Дивитись всі</button>
+        </div>
+
+        <div class="followers-container" id="requests_container"></div>
+    </div>
+
+    <div class="message-container content-border-container">
+        <div class="container-header">
+            <div class="container-header-name-container">
+                <div class="container-image-container">
+                    <img class="container-image" src="{% static 'images/icons/message.svg' %}" alt="">
+                </div>
+                <p class="container-header-name">Повідомлення</p>
+            </div>
+            <button class="container-header-button msg-btn">Дивитись всі</button>
+        </div>
+
+        <div class="message-list" id="chats_container">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block main-content %}
+    {% include "post_app/particles/create_post.html" %}
+
+    <div class="post-content-container" id="post_content">
+        <div class="post-content-container-main" id="post_content_main">
+            {% include 'post_app/download_parts/post_list.html'  %}
+        </div>
+        {% include 'post_app/download_parts/sentinel.html'  %}
+    </div>
+
+{% endblock %}
+
+{% block modals %}
+    {% include "post_app/particles/create_post_form.html" %}
+
+    {% include "post_app/particles/create_tag_form.html" %}
+
+    <div class="modal-registration-bg hidden">
+        <div class="modal-registration-view">
+            <form method="POST" class="modal-registration-view-form" id="registration_modal">
+                {% csrf_token %}
+                <div class="modal-registration-text-div">
+                    <p class="modal-registration-text">Додай деталі про себе</p>
+                </div>
+                <div class="modal-registration-inputs">
+                    <div class="modal-registration-inputs-div">
+                        <p class="registration-text">Псевдонім автора</p>
+                        {{ modal_form.username }}
+                    </div>
+                    <div class="modal-registration-inputs-div">
+                        <p class="registration-text">Ім'я користувача</p>
+                        {{ modal_form.user_handle }}
+                        <div class="text-under-input">
+                            <p class="registration-small-text">Або оберіть: </p>
+                            <p class="registration-small-text generete-text">Запропоновані варіанти відповідно до Ім’я та Прізвища</p>
+                        </div>
+                        <p class="modal-error-text"></p>
+                    </div>
+                </div>
+
+                <div class="registration-btn-div">
+                    <button type="submit" class='registration-btn'>Продовжити</button>
+                </div>
+            </form>
+        </div>  
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script defer>
+        let first_registration = "{{ first_registration }}"
+        const REQUEST_HTTP = "{% url 'all_friends' %}"
+        const ADD_URL_IMG_PATH = "{% static 'images/icons/add_url.svg' %}";
+        const DELTE_IMG_PATH = "{% static 'images/icons/delete_image.svg' %}";
+        const CHAT_URL = "{% url 'chat' %}"
+    </script>
+
+    <script src = "{% static 'js/postLoader.js' %}" defer></script>
+    <script src = "{% static 'js/deletePost.js' %}" defer></script>
+    <script src = "{% static 'js/profileModal.js' %}" defer></script>
+    <script src = "{% static 'js/createPostModal.js' %}" defer></script>
+    <script src = "{% static 'js/homeLoader.js' %}" defer></script>
+{% endblock %}
+

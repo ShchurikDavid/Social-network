@@ -1,0 +1,11 @@
+{% for msg in chat_messages %}
+    {% if msg.type == 'date-block' %}
+        <div class="chat-date">
+            <p class="date-text">{{ msg.date }}</p>
+        </div>
+    {% elif msg.sender.username == user.username %}
+        {% include 'chat_app/chat_msg/my_msg.html'  %}
+    {% else %}
+        {% include 'chat_app/chat_msg/other_msg.html'  %}
+    {% endif %}
+{% endfor %}

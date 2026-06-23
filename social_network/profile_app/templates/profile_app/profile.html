@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}WorldIT Друзі{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/friends.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post_app.css' %}">
+{% endblock %}
+
+{% block info-content %}
+    <div class="profile-container content-border-container">
+        <div class="profile-user-container">
+            <div class="profile-user-image-container">
+                <!-- <img class="profile-user-image online-img-{{select_user.id}} avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt=""> -->
+                <div class="status-wrapper">
+                    <img class="profile-user-image online-img-{{select_user.id}} avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ select_user.profile.avatar }}" alt="">
+                    <img class="status-img" src="{% static 'images/offline.svg' %}" alt="off">
+                </div>
+            </div>
+            <div class="profile-username">
+                <a href="{% url 'profile' user_id=select_user.id action='watch' %}" class="username-text">{{ select_user.profile.pseudonym }}</a>
+                <a href="{% url 'profile' user_id=select_user.id action='watch' %}" class="pseudonym-text">{{ select_user.username }}</a>
+            </div>      
+        </div>
+        <div class="profile-statistics-container">
+            <div class="profile-static">
+                <p class="static-text">{{ select_user.signature|default:'0' }}</p>
+                <p class="name-static-text">Дописи</p>
+            </div>
+            <div class="profile-static profile-static-border">
+                <p class="static-text">{{ select_user.reader|default:'0' }}</p>
+                <p class="name-static-text">Читачі</p>
+            </div>
+            <div class="profile-static">
+                <p class="static-text">{{ select_user.friends|length|default:'0' }}</p>
+                <p class="name-static-text">Друзі</p>
+            </div>
+        </div>
+
+        {% if action == 'friends' %}
+            {% include 'friends_app/particals/buttons/friend_btn.html' %}
+        {% elif action == 'recommendations' %}
+            {% include 'friends_app/particals/buttons/recommendations_btn.html' %}
+        {% elif action == 'requests' %}
+            {% include 'friends_app/particals/buttons/requests_btn.html' %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block main-content %}
+    <div class="post-content-container" id="post_content">
+        <div class="post-content-container-main" id="post_content_main">
+            {% include 'post_app/download_parts/post_list.html'  %}
+        </div>
+        {% include 'post_app/download_parts/sentinel.html'  %}
+    </div>
+{% endblock %}
+
+{% block modals %}{% endblock %}
+
+{% block script %}
+    <script defer>
+        const CHAT_URL = "{% url 'chat' %}"
+        const ALL_FRIENDS_URL = "{% url 'all_friends' %}"
+    </script>
+    
+    <script src="{% static 'js/friendsAction.js' %}" defer></script>
+    <script src = "{% static 'js/deletePost.js' %}" defer></script>
+    <script src = "{% static 'js/postLoader.js' %}" defer></script>
+{% endblock %}

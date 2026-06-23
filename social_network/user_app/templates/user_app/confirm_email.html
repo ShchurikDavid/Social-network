@@ -1,0 +1,38 @@
+<div class="under-auth-navigation-div">
+    <p class="under-confirm-email-text">Ми надіслали 6-значний код на вашу пошту </p>
+    <p class="under-confirm-email-text">(you@example.com). Введіть його нижче, щоб </p>
+    <p class="under-confirm-email-text">підтвердити акаунт</p>
+</div>
+
+<div class="auth-form"> 
+    <form action="{% url 'confirm_email' %}" method="POST" id="confirm_email_form" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-registration-inputs-div">
+            <div class="modal-registration-inputs">
+                <p class="registration-text">Код підтвердження</p>
+
+                <div class="email-code-container">
+                    <div class="email-code-par">
+                        <input class="code-letter" maxlength="1" inputmode="numeric">
+                        <input class="code-letter" maxlength="1" inputmode="numeric">
+                    </div>
+                    <div class="email-code-par">
+                        <input class="code-letter" maxlength="1" inputmode="numeric">
+                        <input class="code-letter" maxlength="1" inputmode="numeric">
+                    </div>
+                    <div class="email-code-par"> 
+                        <input class="code-letter" maxlength="1" inputmode="numeric">
+                        <input class="code-letter" maxlength="1" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <p class="error-text"></p>
+
+    <div class="confirm-btn-div">
+        <button type='submit' form='confirm_email_form' class='confirm-btn'>Увійти</button>
+        <p id="show_confirm_email" class="cameback-text">Назад</p>
+    </div>
+</div>

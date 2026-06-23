@@ -1,0 +1,16 @@
+{% load static %}
+
+{% for select_user in friends %}
+    <div class="followers-user-block user-select open-chat-with" data-user-id="{{ select_user.id }}" data-chat-username="{{ select_user.profile.pseudonym }}">
+        <div class="followers-container-image-container">
+            <!-- <img class="followers-image online-img-{{select_user.id}} avatar-img" src="{% static 'images/icons/indicator.svg' %}" alt=""> -->
+            <div class="status-wrapper">
+                <img class="followers-image online-img-{{select_user.id}} avatar-img" src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}{{ select_user.profile.avatar }}" alt="">
+                <img class="status-small-img" src="{% static 'images/offline.svg' %}" alt="off">
+            </div>
+        </div>
+        <div class="user-block-info">
+            <p class="user-block-username">{{ select_user.profile.pseudonym}}</p>
+        </div>
+    </div>
+{% endfor %}

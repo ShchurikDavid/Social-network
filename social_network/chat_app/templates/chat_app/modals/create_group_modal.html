@@ -1,0 +1,57 @@
+{% load static %}
+
+<div class="modal-create-group-bg hidden">
+    <div class="modal-create-group-view">
+        <form method="POST" class="modal-registration-view-form" id="create_group_modal">
+            {% csrf_token %}
+            <div class="modal-create-post-button-div">
+                <img src="{% static 'images/buttons/exit_button.svg' %}" alt="exit-button" class="create-post-exit-button" id="cansle_create_group_modal">
+            </div>
+
+            
+            <div class="modal-registration-text-div">
+                <p class="modal-registration-text">Нова група</p>
+            </div>
+            
+            <div class="modal-create-post-inputs-div">
+                <p class="create-post-text">Назва группи</p>
+                <input type="text" class='group-name-input' placeholder="Введіть назву" id="group_name_input">
+            </div>
+
+
+            <div class="group-image-container">
+                <img src="{% if LOCAL == 'False' %}http://192.168.0.145:8020/media/{% else %}/media/{% endif %}profiles/avatars/chat_img.svg" alt="chat_img" class="group-image-img">
+                
+                <div class="group-image-texts-container">
+                    <div class="images-text-div">
+                        <input name="avatar" type="file" accept="image/*" multiple="" id="agroup_img_input" hidden>
+                        <img src="{% static 'images/icons/plus.svg' %}" alt="plus" class="images-text-img" id="group_img">
+                        <p class="images-text">Додайте фото</p>
+                    </div>
+                    <div class="images-text-div">
+                        <img src="{% static 'images/icons/img.svg' %}" alt="exit-button" class="images-text-img">
+                        <p class="images-text">Оберіть фото</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-create-post-inputs-div">
+                <p class="create-post-text">Учасники</p>
+
+                <div class="delete-users-container" id="delete_users_container">
+                    
+                </div>
+            </div>
+
+            <div class="create-post-btn-div">
+                <button type="button" class="cansle-tag-btn back-btn" id="cansle_create_group_modal">
+                    Назад
+                </button>
+
+                <button type="button" class="create-tag-btn create-group-btn" id='create_group_btn'>
+                    Створити групу
+                </button>
+            </div> 
+        </form>
+    </div>  
+</div>

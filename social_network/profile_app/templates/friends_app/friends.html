@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}WorldIT Друзі{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/friends.css' %}">
+    <link rel="stylesheet" href="{% static 'css/filter_input.css' %}">
+{% endblock %}
+
+{% block info-content %}
+    <div class="info-navigations">
+        <p class="info-navigations-text info-navigations-active-test" data-id="all">Головна</p>
+        <p class="info-navigations-text" data-id="requests">Запити</p>
+        <p class="info-navigations-text" data-id='recommendations'>Рекомендації</p>
+        <p class="info-navigations-text" data-id="friend">Всі друзі</p>
+    </div>
+{% endblock %}
+
+{% block main-content %}
+    <div class="friends-content-container" id="friends_content">
+        <div class="friends-content-container-main" id="friends_content_main">
+            <div class="one-container-min friends-container scrolls-container content-border-container" data-id="requests"> 
+                <div class="friends-container-header">
+                    <p class="friends-container-title">Запити</p>
+                    <p class="get-all-text" data-id="requests">Дивитись всі</p>
+                </div>
+
+                <div class="contacts-input-wrap contacts-input-wrap-start">
+                    <img src="{% static 'images/icons/search_img.svg' %}" alt="search" class='contacts-input-img contacts-input-img-start'>
+                    <input type="text" class='contacts-input' placeholder="Пошук запиту" id="filter_requests" data-selection="requests">
+                </div>
+
+                <div class="one-min friends-container-content" id="requests">
+                    {% include 'friends_app/particals/requests.html' %}
+                </div>
+            </div>
+            <div class="one-container-min friends-container scrolls-container content-border-container" data-id='recommendations'> 
+                <div class="friends-container-header">
+                    <p class="friends-container-title">Рекомендації</p>
+                    <p class="get-all-text" data-id="recommendations">Дивитись всі</p>
+                </div>
+
+                <div class="contacts-input-wrap contacts-input-wrap-start">
+                    <img src="{% static 'images/icons/search_img.svg' %}" alt="search" class='contacts-input-img contacts-input-img-start'>
+                    <input type="text" class='contacts-input' placeholder="Пошук рекомендацій" id="filter_recommendations" data-selection="recommendations">
+                </div>
+
+                <div class="one-min friends-container-content" id="recommendations">
+                    {% include 'friends_app/particals/recommendations.html' %}
+                </div>
+            </div>
+            <div class="one-container-min friends-container scrolls-container content-border-container" data-id="friend"> 
+                <div class="friends-container-header">
+                    <p class="friends-container-title">Всі друзі</p>
+                    <p class="get-all-text" data-id="friend">Дивитись всі</p>
+                </div>
+
+                <div class="contacts-input-wrap contacts-input-wrap-start">
+                    <img src="{% static 'images/icons/search_img.svg' %}" alt="search" class='contacts-input-img contacts-input-img-start'>
+                    <input type="text" class='contacts-input' placeholder="Пошук друга" id="filter_friend" data-selection="friend">
+                </div>
+
+                <div class="one-min friends-container-content" id="friend">
+                    {% include 'friends_app/particals/friend.html' %}
+                </div>
+            </div>
+        </div>
+        
+        {% include 'post_app/download_parts/sentinel.html'  %}
+    </div>
+{% endblock %}
+
+{% block modals %}{% endblock %}
+
+{% block script %}
+    <script defer>
+        const CHAT_URL = "{% url 'chat' %}"
+        const PROFILE_URL = "{% url 'profile' user_id=0 action='watch' %}"
+    </script>
+
+    <script src="{% static 'js/friends.js' %}" defer></script>
+    <script src="{% static 'js/filterInput.js' %}" defer></script>
+    <script src="{% static 'js/loadSection.js' %}" defer></script>
+{% endblock %}

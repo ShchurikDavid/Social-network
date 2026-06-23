@@ -1,0 +1,67 @@
+{% load static %}
+
+<div class="modal-bg hidden">
+    <div class="modal-create-post-view">
+        <form action="{% url 'create_post' %}"  method="POST" class="modal-create-post-view-form" id="create_post_modal" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-create-post-button-div">
+                <img src="{% static 'images/buttons/exit_button.svg' %}" alt="exit-button" class="create-post-exit-button" id="exit_button">
+            </div>
+            <div class="modal-create-post-text-div">
+                <p class="modal-create-post-text">Створення публікації</p>
+            </div>
+            <div class="modal-create-post-inputs">
+                <div class="modal-create-post-inputs-div">
+                    <p class="create-post-text">Назва публікації</p>
+                    {{ post_form.title }}
+                </div>
+                <div class="modal-create-post-inputs-div">
+                    <p class="create-post-text">Тема публікації</p>
+                    {{ post_form.topic }}
+                </div>
+
+                <div class="tags">
+                    {% for tag in tags %}  
+                        <div class="tag" name="tags" value="{{ tag.id }}" data-id="{{ tag.id }}" id="id_tags_{{ tag.id }}">{{ tag.name }}</div>          
+                    {% endfor %} 
+
+                    <div class="modal-add-urls-div" id="modal_add_tag">
+                        <img src="{% static 'images/icons/add_url.svg' %}" alt="add_tag" class="add-tag-btn" id='add_tag_btn'>
+                    </div>
+                </div>
+
+                <div class="custom-post-area">
+                    <div class="textarea-wrapper">
+                        {{ post_form.content }}
+                        <div id="create_post_modal_text_tags" class="tags-row"></div>
+                    </div>
+                </div>
+
+                <div class="modal-create-post-inputs-div">
+                    <p class="create-post-text">Посилання</p>
+                    <div class="modal-urls-div" id="modal_create_post_urls_div">
+                    </div>
+                    <div class="modal-url">
+                        <input type="url" name="links" class="create-post-input href-post-input" id="create_post_input" placeholder="https://www.instagram.com/world.it.ac">                   
+                        <div class="modal-add-urls-div">
+                            <img src="{% static 'images/icons/add_url.svg' %}" alt="add_url" class="add-url-btn" id='add_url_btn'>
+                        </div>
+                    </div>
+                </div>
+
+                {{ post_form.images }}
+                <div class="images-preview-container hidden" id="image_preview_container"> 
+
+                </div>
+            </div>
+        </form>
+        
+        <div class="create-post-btn-div">
+            <img src="{% static 'images/icons/add_images.svg' %}" alt="add-images-button" class="add-images-button" id='images_field'>
+            <img src="{% static 'images/icons/emoji.svg' %}" alt="emoji-button" class="emoji-button">
+            <button class="create-post-btn" form="create_post_modal">
+                <img src="{% static 'images/buttons/create_post_button.svg' %}" alt="create-post-btn" id="create_post" class="create-post">
+            </button>
+        </div> 
+    </div>  
+</div>

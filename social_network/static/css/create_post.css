@@ -1,0 +1,56 @@
+.create-post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.open-modal-create-post-btn {
+    font-size: 0.75rem;
+    font-weight: 500;
+    width: 11.875rem;
+    height: 100%;
+    padding: 1rem 0.625rem;
+    background-color: var(--text-accent);
+    border-radius: 1.4rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 0rem solid var(--text-accent);
+}
+
+.create-post-container-text-div {
+    width: 100%;
+    min-height: 1.375rem;
+}
+
+.create-post-container-text  {
+    width: 100%;
+    color: var(--text-main);
+    font-weight: 400;
+    font-size: 1rem;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+.create-post-container-text::placeholder {
+  color: var(--text-muted); 
+  opacity: 1; 
+}
+
+.create-post-container-btn-div {
+    width: 100%;
+    height: 2.5rem;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 0.8125rem;
+}
+
+.emoji-button {
+    height: 2.5rem;
+    width: 2.5rem;
+}
